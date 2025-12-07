@@ -7,7 +7,7 @@ public abstract class Piece {
 	
 	protected Point position;
 	public int identifier;
-	public HashSet<Point> validMoves;
+	
 	
 	public Piece(Point startPosition) {
 		position = startPosition;
@@ -17,15 +17,14 @@ public abstract class Piece {
 	 * This method makes sure any move is within the bounds of the board.
 	 */
 	public boolean isMoveValid(Point point, int boardSize) {
-		return 0 <= point.getX() && point.getX() < boardSize && point.getY() < boardSize && point.getY() < boardSize;
+		return 0 <= point.getX() && point.getX() < boardSize && point.getY() >= 0 && point.getY() < boardSize;
 	}
 	
 	/*
 	 * This method moves the piece to a valid position.
 	 */
 	public void move(Point point, int boardSize) {
-		validMoves = findPotentialMoves(boardSize);
-		if(validMoves.contains(point)) {
+		if(findPotentialMoves(boardSize).contains(point)) {
 			setLocation(point);
 		}
 	}

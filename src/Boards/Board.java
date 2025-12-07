@@ -48,6 +48,16 @@ public abstract class Board {
 		}
 	}
 	
-	//Testing if Git is Linked?
-	
+	/*
+	 * This method lets each player see the board from "their" side.
+	 */
+	public void flipBoard() {
+		Piece[][] flippedBoard = new Piece[BOARD_SIZE][BOARD_SIZE];
+		for(int i = 0; i < BOARD_SIZE; i++) {
+			for(int j = 0; j < BOARD_SIZE; j++) {
+				flippedBoard[i][j] = board[BOARD_SIZE - 1 - i][BOARD_SIZE - 1 - j];
+			}
+		}
+		board = flippedBoard;
+	}
 }

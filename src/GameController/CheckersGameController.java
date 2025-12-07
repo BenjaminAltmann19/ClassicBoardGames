@@ -15,7 +15,7 @@ public class CheckersGameController extends GameController{
 	public static final int PLAYER_ONE = 1;
 	public static final int PLAYER_TWO = 2;
 	public static final int NUM_STARTING_ROWS = 3;
-	
+
 
 	public CheckersGameController() {
 		super();
@@ -46,7 +46,7 @@ public class CheckersGameController extends GameController{
 			initializePlayer(player, board.BOARD_SIZE - 3, 0);
 		}
 	}
-	
+
 	/*
 	 * This method adds pieces to the board depending on which player they are.
 	 */
@@ -71,32 +71,43 @@ public class CheckersGameController extends GameController{
 	public void gameLoop() {
 		while(!isGameWon()) {
 			doOneTurn(playerOne);
+			board.flipBoard();
+			System.out.println();
+			board.printBoard();
 			doOneTurn(playerTwo);
+			board.flipBoard();
 		}
 	}
-	
+
 	/*
 	 * Ask which piece to move
 	 * Ask where to move it
 	 */
 	public void doOneTurn(Player player) {
-		System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of the piece you want to move (ex: 3,3)");
-		Piece chosenPiece = board.getPieceAt(input.askForPoint());
-		System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of where you want to move the piece to (ex: 3,3)");
-		Point moveHere = input.askForPoint();
-		if(player.getPieces().contains(chosenPiece)) {
-			movePiece(chosenPiece, moveHere);
-			board.printBoard();
+		boolean moveMade = false;
+		while(!moveMade) {
+			System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of the piece you want to move (ex: 3,3)");
+			Piece chosenPiece = board.getPieceAt(input.askForPoint());
+			System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of where you want to move the piece to (ex: 3,3)");
+			Point moveHere = input.askForPoint();
+			if(player.getPieces().contains(chosenPiece) && chosenPiece.findPotentialMoves(board.BOARD_SIZE).contains(moveHere)) {
+				movePiece(chosenPiece, moveHere);
+				board.printBoard();
+				moveMade = true;
+			}
+			else {
+				System.out.println("Invalid selection, Try again");
+			}
 		}
 	}
-	
+
 	/*
 	 * This method returns true if the game has been won by someone
 	 */
 	public boolean isGameWon() {
 		return playerOne.hasNoPieces() || playerTwo.hasNoPieces();
 	}
-	
+
 	/*
 	 * This method is adding the piece to the players "hand" and placing it on the board
 	 */
@@ -105,9 +116,9 @@ public class CheckersGameController extends GameController{
 		player.addPiece(piece);
 		board.getBoard()[row][column] = piece;
 	}
-	
+
 	public void jumpPiece(Player player, Piece piece) {
-		
+
 	}
 
 
