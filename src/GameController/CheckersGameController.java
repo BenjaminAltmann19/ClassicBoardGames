@@ -90,7 +90,7 @@ public class CheckersGameController extends GameController{
 			Piece chosenPiece = board.getPieceAt(input.askForPoint());
 			System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of where you want to move the piece to (ex: 3,3)");
 			Point moveHere = input.askForPoint();
-			if(player.getPieces().contains(chosenPiece) && chosenPiece.findPotentialMoves(board.BOARD_SIZE).contains(moveHere)) {
+			if(player.getPieces().contains(chosenPiece) && chosenPiece.findPotentialMoves(board).contains(moveHere)) {
 				movePiece(chosenPiece, moveHere);
 				board.printBoard();
 				moveMade = true;

@@ -46,7 +46,7 @@ public abstract class GameController {
 	public void movePiece(Piece piece, Point point) {
 		int previousX = (int)piece.getPosition().getX();
 		int previousY = (int)piece.getPosition().getY();
-		piece.move(point, board.BOARD_SIZE);
+		piece.move(point, board);
 		board.getBoard()[(int)point.getX()][(int)point.getY()] = piece;
 		board.getBoard()[previousX][previousY] = new EmptyPiece(new Point(previousX, previousY));
 	}
