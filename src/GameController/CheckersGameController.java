@@ -1,7 +1,6 @@
 package GameController;
 
 import java.awt.Point;
-import java.util.Scanner;
 
 import Boards.CheckersBoard;
 import Player.CheckersPlayer;
@@ -71,11 +70,11 @@ public class CheckersGameController extends GameController{
 	public void gameLoop() {
 		while(!isGameWon()) {
 			doOneTurn(playerOne);
-			board.flipBoard();
+			//board.flipBoard();
 			System.out.println();
 			board.printBoard();
 			doOneTurn(playerTwo);
-			board.flipBoard();
+			//board.flipBoard();
 		}
 	}
 
@@ -86,17 +85,23 @@ public class CheckersGameController extends GameController{
 	public void doOneTurn(Player player) {
 		boolean moveMade = false;
 		while(!moveMade) {
-			System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of the piece you want to move (ex: 3,3)");
+			System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of the piece you want to move (ex: row,col)");
 			Piece chosenPiece = board.getPieceAt(input.askForPoint());
-			System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of where you want to move the piece to (ex: 3,3)");
+			System.out.println("Position: " + chosenPiece.getPosition());
+			System.out.println(chosenPiece.findPotentialMoves(board, player, chosenPiece.getPosition()));
+			System.out.println("Player: " + player.getPlayerOrder() + " Enter the cordinates of where you want to move the piece to (ex: row,col)");
 			Point moveHere = input.askForPoint();
-			if(player.getPieces().contains(chosenPiece) && chosenPiece.findPotentialMoves(board).contains(moveHere)) {
-				movePiece(chosenPiece, moveHere);
+			if(player.getPieces().contains(chosenPiece)) {
+				if(chosenPiece.findPotentialMoves(board, player, chosenPiece.getPosition()).contains(moveHere)) {
+				movePiece(chosenPiece, moveHere, player);
 				board.printBoard();
 				moveMade = true;
+				}else {
+					System.out.println("Invalid Move, try again");
+				}
 			}
 			else {
-				System.out.println("Invalid selection, Try again");
+				System.out.println("Invalid Location selected, Try again");
 			}
 		}
 	}
@@ -116,9 +121,29 @@ public class CheckersGameController extends GameController{
 		player.addPiece(piece);
 		board.getBoard()[row][column] = piece;
 	}
-
-	public void jumpPiece(Player player, Piece piece) {
-
+	
+	/*
+	 * This method moves a piece to a new point and fills in the gap left behind.
+	 * If the move involves a "jump" it also will handle that
+	 */
+	@Override
+	public void movePiece(Piece piece, Point nextLocation, Player player) {
+		if(isJump(piece.getPosition(), nextLocation)) {
+			Point midPoint = findMidPoint(piece.getPosition(), nextLocation);
+			Piece captured = board.getPieceAt(midPoint);
+			
+			board.setLocation(midPoint, new EmptyPiece(midPoint));
+			getOpponent(player).getPieces().remove(captured);
+		}
+		super.movePiece(piece, nextLocation, player);
+	}
+	
+	private boolean isJump(Point currentLocation, Point nextLocation) {
+		return (Math.abs(currentLocation.x - nextLocation.x) == 2 && Math.abs(currentLocation.y - nextLocation.y) == 2);
+	}
+	
+	private Point findMidPoint(Point currentLocation, Point nextLocation) {
+	    return new Point((currentLocation.x + nextLocation.x) / 2, (currentLocation.y + nextLocation.y) / 2);
 	}
 
 
