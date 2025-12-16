@@ -3,11 +3,16 @@ package pieces;
 import java.awt.Point;
 import java.util.HashSet;
 
+import Boards.Board;
+import Player.Player;
+
 public abstract class Piece {
 	
 	protected Point position;
-	public int identifier;
-	public HashSet<Point> validMoves;
+	
+	//What type of piece this is
+	protected int identifier;
+	
 	
 	public Piece(Point startPosition) {
 		position = startPosition;
@@ -16,16 +21,15 @@ public abstract class Piece {
 	/*
 	 * This method makes sure any move is within the bounds of the board.
 	 */
-	public boolean isMoveValid(Point point, int boardSize) {
-		return 0 <= point.getX() && point.getX() < boardSize && point.getY() < boardSize && point.getY() < boardSize;
+	public boolean isMoveValid(Point point, Board board) {
+		return 0 <= point.getX() && point.getX() < board.BOARD_SIZE && point.getY() >= 0 && point.getY() < board.BOARD_SIZE;
 	}
 	
 	/*
 	 * This method moves the piece to a valid position.
 	 */
-	public void move(Point point, int boardSize) {
-		validMoves = findPotentialMoves(boardSize);
-		if(validMoves.contains(point)) {
+	public void move(Board board, Player player, Point point) {
+		if(findPotentialMoves(board, player, point).contains(point)) {
 			setLocation(point);
 		}
 	}
@@ -37,10 +41,11 @@ public abstract class Piece {
 		return identifier;
 	}
 	
+	
 	public Point getPosition() {
 		return position;
 	}
 	
-	public abstract HashSet<Point> findPotentialMoves(int boardSize);
+	public abstract HashSet<Point> findPotentialMoves(Board board, Player player, Point point);
 	
 }

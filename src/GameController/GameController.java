@@ -1,6 +1,7 @@
 package GameController;
 
 import java.awt.Point;
+import java.util.HashSet;
 
 import Boards.Board;
 import Inputs.Input;
@@ -43,12 +44,25 @@ public abstract class GameController {
 	/*
 	 * This method moves a piece to a new point and fills in the gap left behind.
 	 */
-	public void movePiece(Piece piece, Point point) {
+	public void movePiece(Piece piece, Point point, Player player) {
 		int previousX = (int)piece.getPosition().getX();
 		int previousY = (int)piece.getPosition().getY();
-		piece.move(point, board.BOARD_SIZE);
+		piece.move(board, player, point);
 		board.getBoard()[(int)point.getX()][(int)point.getY()] = piece;
+		piece.setLocation(point);
 		board.getBoard()[previousX][previousY] = new EmptyPiece(new Point(previousX, previousY));
+	}
+	
+	
+	/*
+	 * This method returns the players Opponent
+	 */
+	protected Player getOpponent(Player player) {
+		if(player.getPlayerOrder() == 1) {
+			return playerTwo;
+		}else {
+			return playerOne;
+		}
 	}
 
 }

@@ -2,6 +2,7 @@ package Boards;
 
 import java.awt.Point;
 
+import Player.Player;
 import pieces.EmptyPiece;
 import pieces.Piece;
 
@@ -23,6 +24,10 @@ public abstract class Board {
 	
 	public Piece[][] getBoard(){
 		return board;
+	}
+	
+	public void setLocation(Point point, Piece piece) {
+		board[point.x][point.y] = piece;
 	}
 	
 	/*
@@ -48,4 +53,27 @@ public abstract class Board {
 		}
 	}
 	
+	public int getForwardDirection(Player player) {
+		if(player.getPlayerOrder() == 1) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	/*
+	 * This method lets each player see the board from "their" side.
+	 * 
+	 * NO LONGER IN USE
+	 */
+	public void flipBoard() {
+		Piece[][] flippedBoard = new Piece[BOARD_SIZE][BOARD_SIZE];
+		for(int i = 0; i < BOARD_SIZE; i++) {
+			for(int j = 0; j < BOARD_SIZE; j++) {
+				flippedBoard[i][j] = board[BOARD_SIZE - 1 - i][BOARD_SIZE - 1 - j];
+				flippedBoard[i][j].setLocation(new Point(i,j));
+			}
+		}
+		board = flippedBoard;
+	}
 }
