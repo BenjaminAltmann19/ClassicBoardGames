@@ -3,7 +3,9 @@ package GameController;
 import java.awt.Point;
 import java.util.HashSet;
 
+import AnimationController.AnimationController;
 import Boards.Board;
+import Display.GridUI;
 import Inputs.Input;
 import Player.Player;
 import pieces.EmptyPiece;
@@ -15,6 +17,11 @@ public abstract class GameController {
 	Player playerOne;
 	Player playerTwo;
 	Input input;
+	GridUI gridUI;
+	public AnimationController animationController;
+	
+	enum PlayersTurn{PLAYER_ONE_TURN, PLAYER_TWO_TURN};
+	PlayersTurn playersTurn;
 	
 	public GameController() {
 		input = new Input();
@@ -39,7 +46,7 @@ public abstract class GameController {
 	 * Ask which piece to move
 	 * Ask where to move it
 	 */
-	public abstract void doOneTurn(Player player);
+	public abstract void doOneTurn();
 	
 	/*
 	 * This method moves a piece to a new point and fills in the gap left behind.
@@ -64,5 +71,40 @@ public abstract class GameController {
 			return playerOne;
 		}
 	}
+	
+	
+	public Player getPlayer(int num) {
+		if(num == 1) {
+			return playerOne;
+		}else{
+			return playerTwo;
+		}
+	}
+	
+	public Point parsePoints(String stringPoint) {
+		String[] parts = stringPoint.split(",");
+		int x = Integer.parseInt(parts[0].trim());
+		int y = Integer.parseInt(parts[1].trim());
+		return new Point(x,y);
+	}
+	
+	
+	protected void changePlayerTurn() {
+		if(playersTurn == PlayersTurn.PLAYER_ONE_TURN) {
+			playersTurn = PlayersTurn.PLAYER_TWO_TURN;
+		}else {
+			playersTurn = PlayersTurn.PLAYER_ONE_TURN;
+		}
+	}
+	
+	public Player getPlayerForTurn() {
+		if(playersTurn == PlayersTurn.PLAYER_ONE_TURN) {
+			return playerOne;
+		}else {
+			return playerTwo;
+		}
+	}
+	
+	public abstract void promotePiece(Piece piece);
 
 }

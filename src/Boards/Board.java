@@ -51,6 +51,7 @@ public abstract class Board {
 				}
 			System.out.println();
 		}
+		System.out.println();
 	}
 	
 	public int getForwardDirection(Player player) {
