@@ -30,6 +30,12 @@ public abstract class Player {
 		return pieces;
 	}
 	
+	public void removePiece(Piece piece) {
+		if(pieces.contains(piece)) {
+			pieces.remove(piece);
+		}
+	}
+	
 	
 	
 }

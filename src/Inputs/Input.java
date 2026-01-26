@@ -18,11 +18,14 @@ public class Input {
 	public Point askForPoint() {
 		
 		String stringPoint = input.nextLine();
+		return parsePoints(stringPoint);
+		
+	}
+	
+	public Point parsePoints(String stringPoint) {
 		String[] parts = stringPoint.split(",");
 		int x = Integer.parseInt(parts[0].trim());
 		int y = Integer.parseInt(parts[1].trim());
-		
 		return new Point(x,y);
-		
 	}
 }

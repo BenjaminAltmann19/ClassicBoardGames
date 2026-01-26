@@ -39,18 +39,17 @@ public class CheckersPiece extends Piece{
 	    addJumpLandings(board, player, currentLocation, new HashSet<>(), jumps);
 
 	    steps.addAll(jumps);
-	    //System.out.println(steps);
 	    return steps;
 	}
 
-	private void addStepIfOpen(Board board, Point currentLocation, int forwardDirection, int directionY, HashSet<Point> steps) {
+	protected void addStepIfOpen(Board board, Point currentLocation, int forwardDirection, int directionY, HashSet<Point> steps) {
 	    Point nextLocation = new Point(currentLocation.x + forwardDirection, currentLocation.y + directionY);
 	    if (isMoveValid(nextLocation, board) && board.getPieceAt(nextLocation).getIdentifier() == 0) {
 	        steps.add(nextLocation);
 	    }
 	}
 
-	private void addJumpLandings(Board board, Player player, Point currentLocation, HashSet<Point> capturedSoFar, HashSet<Point> steps) {
+	protected void addJumpLandings(Board board, Player player, Point currentLocation, HashSet<Point> capturedSoFar, HashSet<Point> steps) {
 
 		int forwardDirection = board.getForwardDirection(player);
 	    // forward-left and forward-right jump directions
@@ -58,7 +57,7 @@ public class CheckersPiece extends Piece{
 	    tryJump(board, player, currentLocation, forwardDirection, +1, capturedSoFar, steps);
 	}
 
-	private void tryJump(Board board, Player player, Point currentLocation, int forwardDirection, int directionY, HashSet<Point> capturedSoFar, HashSet<Point> steps) {
+	protected void tryJump(Board board, Player player, Point currentLocation, int forwardDirection, int directionY, HashSet<Point> capturedSoFar, HashSet<Point> steps) {
 
 	    Point mid = new Point(currentLocation.x + forwardDirection, currentLocation.y + directionY);
 	    Point landing = new Point(currentLocation.x + 2 * forwardDirection, currentLocation.y + 2 * directionY);
