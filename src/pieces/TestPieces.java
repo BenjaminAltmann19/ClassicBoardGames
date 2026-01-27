@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import Boards.CheckersBoard;
 import Player.CheckersPlayer;
+import pieces.CheckersPieces.CheckersPiece;
 
 class TestPieces {
 

@@ -7,10 +7,10 @@ import Boards.CheckersBoard;
 import Player.CheckersPlayer;
 import Player.Player;
 import javafx.stage.Stage;
-import pieces.CheckersPiece;
 import pieces.EmptyPiece;
 import pieces.Piece;
-import pieces.PromotedCheckersPiece;
+import pieces.CheckersPieces.CheckersPiece;
+import pieces.CheckersPieces.PromotedCheckersPiece;
 
 public class CheckersGameController extends GameController{
 
@@ -74,6 +74,8 @@ public class CheckersGameController extends GameController{
 	}
 	/*
 	 * This method is the main game loop
+	 * 
+	 * NOT IN USE
 	 */
 	public void gameLoop() {
 		while(!isGameWon()) {

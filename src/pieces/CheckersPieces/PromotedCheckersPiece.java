@@ -1,10 +1,11 @@
-package pieces;
+package pieces.CheckersPieces;
 
 import java.awt.Point;
 import java.util.HashSet;
 
 import Boards.Board;
 import Player.Player;
+import pieces.Piece;
 
 public class PromotedCheckersPiece extends CheckersPiece {
 
