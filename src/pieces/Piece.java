@@ -50,7 +50,7 @@ public abstract class Piece {
 		return position;
 	}
 	
-	public abstract HashSet<Point> findPotentialMoves(Board board, Player player, Point point);
+	public abstract HashSet<Point> findPotentialMoves(Board board, Player player, Point currentPosition);
 	
 	public String getPositionString(Point point) {
 		return ("(" + point.x + ", " + point.y + ")");
