@@ -16,6 +16,14 @@ public class PawnChessPiece extends ChessPiece{
 		isFirstMove = true;
 	}
 
+	
+	/*
+	 * Potential Moves will:
+	 * 		be forward if its a regular move (2 if its first is possible)
+	 * 		diagonal if there is an opponents piece to take
+	 * 
+	 * 		cannot result in king going into check
+	 */
 	public HashSet<Point> findPotentialMoves(Board board, Player player, Point currentPosition){
 		HashSet<Point> potentialMoves = new HashSet<Point>();
 		Point oneForward = new Point(currentPosition.x + board.getForwardDirection(player), currentPosition.y);
