@@ -1,6 +1,7 @@
 
 import AnimationController.AnimationController;
 import GameController.CheckersGameController;
+import GameController.ChessGameController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -53,7 +54,8 @@ public class Main extends Application{
     		myStage.show();
     		myStage.centerOnScreen();
     	}else if(game.equals("Chess")){
-    		
+    		ChessGameController chessGameController = new ChessGameController();
+    		myStage.setScene(chessGameController.animationController.createStartingScreen(chessGameController.getBoard()));
     	}else {
     		
     	}

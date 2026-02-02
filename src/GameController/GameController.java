@@ -9,6 +9,7 @@ import Inputs.Input;
 import Player.Player;
 import pieces.EmptyPiece;
 import pieces.Piece;
+import pieces.CheckersPieces.CheckersPiece;
 
 public abstract class GameController {
 
@@ -19,18 +20,32 @@ public abstract class GameController {
 	GridUI gridUI;
 	public AnimationController animationController;
 	
+	public static final int PLAYER_ONE = 1;
+	public static final int PLAYER_TWO = 2;
+	
 	enum PlayersTurn{PLAYER_ONE_TURN, PLAYER_TWO_TURN};
 	PlayersTurn playersTurn;
 	
 	public GameController() {
 		input = new Input();
+		playersTurn = PlayersTurn.PLAYER_ONE_TURN;
 	}
 	/*
 	 * This method prepares the board to start
 	 */
-	public void initialize() {
-		board.initializeBoard();
+	protected void initialize() {
+		
 	}
+	
+	protected void initializePlayer(Player player) {
+		if(player.getPlayerOrder() == 1) {
+			initializePlayer(player, 0, 0);
+		}else {
+			initializePlayer(player, board.BOARD_SIZE - 3, 0);
+		}
+	}
+	
+	protected abstract void initializePlayer(Player player, int startingRow, int startingColumn);
 	
 	public Board getBoard() {
 		return board;
@@ -78,6 +93,15 @@ public abstract class GameController {
 		}else{
 			return playerTwo;
 		}
+	}
+	
+	/*
+	 * This method is adding the piece to the players "hand" and placing it on the board
+	 */
+	protected void createPiece(Player player, int row, int column) {
+		CheckersPiece piece = new CheckersPiece(new Point(row,column));
+		player.addPiece(piece);
+		board.getBoard()[row][column] = piece;
 	}
 	
 	public Point parsePoints(String stringPoint) {
