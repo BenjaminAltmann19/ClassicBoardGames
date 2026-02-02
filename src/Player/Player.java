@@ -2,6 +2,7 @@ package Player;
 
 import java.util.LinkedList;
 
+import Boards.Board;
 import pieces.Piece;
 
 public abstract class Player {
@@ -10,13 +11,13 @@ public abstract class Player {
 	protected LinkedList<Piece> pieces = new LinkedList<>();
 	
 	//Player one or player two
-	private int playerOrder;
+	protected int playerOrder;
 	
-	public Player(int playerOrder) {
+	public Player(int playerOrder, Board board) {
 		this.playerOrder = playerOrder;
 	}
 	
-	public abstract boolean hasNoPieces();
+	public abstract boolean lossCondition();
 	
 	public void addPiece(Piece piece) {
 		pieces.add(piece);

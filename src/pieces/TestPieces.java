@@ -16,7 +16,7 @@ class TestPieces {
 	@Test
 	void testFindPotentialMoves() {
 		CheckersBoard board = new CheckersBoard();
-		CheckersPlayer player = new CheckersPlayer(1);
+		CheckersPlayer player = new CheckersPlayer(1, board);
 		CheckersPiece checkerPiece = new CheckersPiece(new Point(3,3));
 		player.addPiece(checkerPiece);
 		board.setLocation(checkerPiece.getPosition(), checkerPiece);
@@ -29,7 +29,7 @@ class TestPieces {
 	@Test
 	void testFindPotentialMovesWall() {
 		CheckersBoard board = new CheckersBoard();
-		CheckersPlayer player = new CheckersPlayer(1);
+		CheckersPlayer player = new CheckersPlayer(1, board);
 		CheckersPiece checkerPiece = new CheckersPiece(new Point(2,0));
 		player.addPiece(checkerPiece);
 		board.setLocation(checkerPiece.getPosition(), checkerPiece);
@@ -41,8 +41,8 @@ class TestPieces {
 	@Test
 	void testFindPotentialMovesTake() {
 		CheckersBoard board = new CheckersBoard();
-		CheckersPlayer playerOne = new CheckersPlayer(1);
-		CheckersPlayer playerTwo = new CheckersPlayer(2);
+		CheckersPlayer playerOne = new CheckersPlayer(1, board);
+		CheckersPlayer playerTwo = new CheckersPlayer(2, board);
 		CheckersPiece checkerPiece = new CheckersPiece(new Point(0,2));
 		CheckersPiece enemyPiece = new CheckersPiece(new Point(1,3));
 		playerOne.addPiece(checkerPiece);
@@ -58,8 +58,8 @@ class TestPieces {
 	@Test
 	void testFindPotentialMovesMulitpleTakes() {
 		CheckersBoard board = new CheckersBoard();
-		CheckersPlayer playerOne = new CheckersPlayer(1);
-		CheckersPlayer playerTwo = new CheckersPlayer(2);
+		CheckersPlayer playerOne = new CheckersPlayer(1, board);
+		CheckersPlayer playerTwo = new CheckersPlayer(2, board);
 		CheckersPiece checkerPiece = new CheckersPiece(new Point(3,3));
 		CheckersPiece enemyPiece = new CheckersPiece(new Point(4,4));
 		CheckersPiece enemyPieceTwo = new CheckersPiece(new Point(6,6));

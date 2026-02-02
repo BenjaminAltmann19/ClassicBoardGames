@@ -6,16 +6,12 @@ import AnimationController.CheckersAnimationController;
 import Boards.CheckersBoard;
 import Player.CheckersPlayer;
 import Player.Player;
-import javafx.stage.Stage;
 import pieces.EmptyPiece;
 import pieces.Piece;
-import pieces.CheckersPieces.CheckersPiece;
 import pieces.CheckersPieces.PromotedCheckersPiece;
 
 public class CheckersGameController extends GameController{
 
-	public static final int PLAYER_ONE = 1;
-	public static final int PLAYER_TWO = 2;
 	public static final int NUM_STARTING_ROWS = 3;
 
 
@@ -23,13 +19,10 @@ public class CheckersGameController extends GameController{
 	public CheckersGameController() {
 		super();
 		board = new CheckersBoard();
-		playerOne = new CheckersPlayer(PLAYER_ONE);
-		playerTwo = new CheckersPlayer(PLAYER_TWO);
-		playersTurn = PlayersTurn.PLAYER_ONE_TURN;
+		playerOne = new CheckersPlayer(PLAYER_ONE, board);
+		playerTwo = new CheckersPlayer(PLAYER_TWO, board);
 		initialize();
 		animationController = new CheckersAnimationController(board, this);
-		//board.printBoard();
-		//gameLoop();
 	}
 
 
@@ -37,7 +30,7 @@ public class CheckersGameController extends GameController{
 	/*
 	 * set everything to be ready to start
 	 */
-	public void initialize() {
+	protected void initialize() {
 		super.initialize();
 		initializePlayer(playerOne);
 		initializePlayer(playerTwo);
@@ -46,18 +39,7 @@ public class CheckersGameController extends GameController{
 	/*
 	 * This method adds pieces to the board depending on which player they are.
 	 */
-	public void initializePlayer(Player player) {
-		if(player.getPlayerOrder() == 1) {
-			initializePlayer(player, 0, 0);
-		}else {
-			initializePlayer(player, board.BOARD_SIZE - 3, 0);
-		}
-	}
-
-	/*
-	 * This method adds pieces to the board depending on which player they are.
-	 */
-	private void initializePlayer(Player player, int startingRow, int startingColumn) {
+	protected void initializePlayer(Player player, int startingRow, int startingColumn) {
 		for(int i = startingRow; i < startingRow + NUM_STARTING_ROWS; i++) {
 			for(int j = startingColumn; j < board.BOARD_SIZE; j++) {
 				if(j % 2 == 0) {
@@ -112,17 +94,10 @@ public class CheckersGameController extends GameController{
 	 * This method returns true if the game has been won by someone
 	 */
 	public boolean isGameWon() {
-		return playerOne.hasNoPieces() || playerTwo.hasNoPieces();
+		return playerOne.lossCondition() || playerTwo.lossCondition();
 	}
 
-	/*
-	 * This method is adding the piece to the players "hand" and placing it on the board
-	 */
-	public void createPiece(Player player, int row, int column) {
-		CheckersPiece piece = new CheckersPiece(new Point(row,column));
-		player.addPiece(piece);
-		board.getBoard()[row][column] = piece;
-	}
+
 
 	/*
 	 * This method moves a piece to a new point and fills in the gap left behind.
