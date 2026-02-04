@@ -1,6 +1,7 @@
 package GameController;
 
 import java.awt.Point;
+import java.util.LinkedList;
 
 import AnimationController.AnimationController;
 import Boards.Board;
@@ -30,22 +31,7 @@ public abstract class GameController {
 		input = new Input();
 		playersTurn = PlayersTurn.PLAYER_ONE_TURN;
 	}
-	/*
-	 * This method prepares the board to start
-	 */
-	protected void initialize() {
-		
-	}
-	
-	protected void initializePlayer(Player player) {
-		if(player.getPlayerOrder() == 1) {
-			initializePlayer(player, 0, 0);
-		}else {
-			initializePlayer(player, board.BOARD_SIZE - 3, 0);
-		}
-	}
-	
-	protected abstract void initializePlayer(Player player, int startingRow, int startingColumn);
+
 	
 	public Board getBoard() {
 		return board;
@@ -95,14 +81,6 @@ public abstract class GameController {
 		}
 	}
 	
-	/*
-	 * This method is adding the piece to the players "hand" and placing it on the board
-	 */
-	protected void createPiece(Player player, int row, int column) {
-		CheckersPiece piece = new CheckersPiece(new Point(row,column), player.getPlayerOrder());
-		player.addPiece(piece);
-		board.getBoard()[row][column] = piece;
-	}
 	
 	public Point parsePoints(String stringPoint) {
 		String[] parts = stringPoint.split(",");
@@ -129,5 +107,18 @@ public abstract class GameController {
 	}
 	
 	public abstract void promotePiece(Piece piece);
+	
+	protected void updateBoard() {
+		//get all pieces from each player
+		LinkedList<Piece> allPieces = new LinkedList<>();
+		allPieces.addAll(playerOne.getPieces());
+		allPieces.addAll(playerTwo.getPieces());
+		//clear board
+		board.emptyBoard();
+		//for each piece, look at its position and place it there on the board
+		for(Piece piece : allPieces) {
+			board.setLocation(piece.getPosition(), piece);
+		}
+	}
 
 }

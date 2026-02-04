@@ -12,7 +12,7 @@ public abstract class Board {
 	Piece[][] board = new Piece[BOARD_SIZE][BOARD_SIZE];
 	
 	public Board() {
-		initializeBoard();
+		emptyBoard();
 	}
 	
 	/*
@@ -33,7 +33,7 @@ public abstract class Board {
 	/*
 	 * This method starts the board with all empty pieces
 	 */
-	public void initializeBoard() {
+	public void emptyBoard() {
 		for(int i = 0; i < BOARD_SIZE; i++) {
 			for(int j = 0; j < BOARD_SIZE; j++) {
 				board[i][j] = new EmptyPiece(new Point(i, j));

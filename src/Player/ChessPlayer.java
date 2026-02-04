@@ -10,7 +10,6 @@ public class ChessPlayer extends Player {
 	
 	public ChessPlayer(int playerOrder, Board board) {
 		super(playerOrder, board);
-		initializePieces(board);
 	}
 	
 	public boolean lossCondition() {
@@ -21,7 +20,7 @@ public class ChessPlayer extends Player {
 		return false;	//Temporary
 	}
 	
-	private void initializePieces(Board board) {
+	protected void initializePieces(Board board) {
 		initializePawns(board);
 		initializeKnights(board);
 		initializeBishops(board);
@@ -36,7 +35,7 @@ public class ChessPlayer extends Player {
 	 * Add pawns to players "hand" for start of game
 	 */
 	private void initializePawns(Board board){
-		if(playerOrder == 0) {
+		if(playerOrder == 1) {
 			for(int i = 0; i < Board.BOARD_SIZE; i++) {
 				pieces.add(new PawnChessPiece(new Point(1,i), playerOrder));
 			}
@@ -52,7 +51,7 @@ public class ChessPlayer extends Player {
 	 * Add knights to players "Hand" for start of game
 	 */
 	private void initializeKnights(Board board) {
-		if(playerOrder == 0) {
+		if(playerOrder == 1) {
 			pieces.add(new KnightChessPiece(new Point(0,1), playerOrder));
 			pieces.add(new KnightChessPiece(new Point(0, board.BOARD_SIZE - 2), playerOrder));
 		}else {

@@ -12,7 +12,7 @@ public class ChessAnimationController extends AnimationController{
 		
 		//Switch with pictures
 		colorMapping.put((Integer) 0, Color.WHITE);		//blank
-		colorMapping.put((Integer) 1, Color.BLUE);		//Pawn
+		colorMapping.put((Integer) 1, Color.RED);		//Pawn
 		colorMapping.put((Integer) 2, Color.GREEN);		//Knight
 		colorMapping.put((Integer) 3, Color.PINK);		//Bishop
 		colorMapping.put((Integer) 4, Color.BROWN);		//Rook

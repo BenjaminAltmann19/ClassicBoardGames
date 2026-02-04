@@ -15,6 +15,7 @@ public abstract class Player {
 	
 	public Player(int playerOrder, Board board) {
 		this.playerOrder = playerOrder;
+		initializePieces(board);
 	}
 	
 	public abstract boolean lossCondition();
@@ -36,6 +37,8 @@ public abstract class Player {
 			pieces.remove(piece);
 		}
 	}
+	
+	protected abstract void initializePieces(Board board);
 	
 	
 	
