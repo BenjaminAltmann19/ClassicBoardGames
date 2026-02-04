@@ -17,7 +17,7 @@ class TestPieces {
 	void testFindPotentialMoves() {
 		CheckersBoard board = new CheckersBoard();
 		CheckersPlayer player = new CheckersPlayer(1, board);
-		CheckersPiece checkerPiece = new CheckersPiece(new Point(3,3));
+		CheckersPiece checkerPiece = new CheckersPiece(new Point(3,3), player.getPlayerOrder());
 		player.addPiece(checkerPiece);
 		board.setLocation(checkerPiece.getPosition(), checkerPiece);
 		HashSet<Point> correctMoves = new HashSet<Point>();
@@ -30,7 +30,7 @@ class TestPieces {
 	void testFindPotentialMovesWall() {
 		CheckersBoard board = new CheckersBoard();
 		CheckersPlayer player = new CheckersPlayer(1, board);
-		CheckersPiece checkerPiece = new CheckersPiece(new Point(2,0));
+		CheckersPiece checkerPiece = new CheckersPiece(new Point(2,0), player.getPlayerOrder());
 		player.addPiece(checkerPiece);
 		board.setLocation(checkerPiece.getPosition(), checkerPiece);
 		HashSet<Point> correctMoves = new HashSet<Point>();
@@ -43,8 +43,8 @@ class TestPieces {
 		CheckersBoard board = new CheckersBoard();
 		CheckersPlayer playerOne = new CheckersPlayer(1, board);
 		CheckersPlayer playerTwo = new CheckersPlayer(2, board);
-		CheckersPiece checkerPiece = new CheckersPiece(new Point(0,2));
-		CheckersPiece enemyPiece = new CheckersPiece(new Point(1,3));
+		CheckersPiece checkerPiece = new CheckersPiece(new Point(0,2), playerOne.getPlayerOrder());
+		CheckersPiece enemyPiece = new CheckersPiece(new Point(1,3), playerTwo.getPlayerOrder());
 		playerOne.addPiece(checkerPiece);
 		playerTwo.addPiece(enemyPiece);
 		board.setLocation(checkerPiece.getPosition(), checkerPiece);
@@ -60,9 +60,9 @@ class TestPieces {
 		CheckersBoard board = new CheckersBoard();
 		CheckersPlayer playerOne = new CheckersPlayer(1, board);
 		CheckersPlayer playerTwo = new CheckersPlayer(2, board);
-		CheckersPiece checkerPiece = new CheckersPiece(new Point(3,3));
-		CheckersPiece enemyPiece = new CheckersPiece(new Point(4,4));
-		CheckersPiece enemyPieceTwo = new CheckersPiece(new Point(6,6));
+		CheckersPiece checkerPiece = new CheckersPiece(new Point(3,3), playerOne.getPlayerOrder());
+		CheckersPiece enemyPiece = new CheckersPiece(new Point(4,4), playerTwo.getPlayerOrder());
+		CheckersPiece enemyPieceTwo = new CheckersPiece(new Point(6,6), playerTwo.getPlayerOrder());
 		playerOne.addPiece(checkerPiece);
 		playerTwo.addPiece(enemyPiece);
 		playerTwo.addPiece(enemyPieceTwo);

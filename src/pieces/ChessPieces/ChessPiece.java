@@ -10,8 +10,8 @@ import pieces.Piece;
 public abstract class ChessPiece extends Piece {
 
 	
-	public ChessPiece(Point startPosition) {
-		super(startPosition);
+	public ChessPiece(Point startPosition, int owner) {
+		super(startPosition, owner);
 	}
 	
 	public abstract HashSet<Point> findPotentialMoves(Board board, Player player, Point currentPosition);

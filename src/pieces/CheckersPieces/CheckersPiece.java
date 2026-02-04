@@ -9,8 +9,8 @@ import pieces.Piece;
 
 public class CheckersPiece extends Piece{
 
-	public CheckersPiece(Point startPosition) {
-		super(startPosition);
+	public CheckersPiece(Point startPosition, int owner) {
+		super(startPosition, owner);
 		identifier = 1;
 	}
 

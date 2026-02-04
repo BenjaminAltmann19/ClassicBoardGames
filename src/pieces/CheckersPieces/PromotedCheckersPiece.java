@@ -10,8 +10,8 @@ import pieces.Piece;
 public class PromotedCheckersPiece extends CheckersPiece {
 
 	
-	public PromotedCheckersPiece(Point startingPoint){
-		super(startingPoint);
+	public PromotedCheckersPiece(Point startingPoint, int owner){
+		super(startingPoint, owner);
 		identifier = 2;
 	}
 	
