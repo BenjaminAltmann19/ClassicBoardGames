@@ -22,9 +22,6 @@ public class ChessGameController extends GameController{
 		
 	}
 	
-	public void gameLoop() {
-		
-	}
 	
 	public void promotePiece(Piece piece) {
 		

@@ -18,6 +18,13 @@ public abstract class Player {
 		initializePieces(board);
 	}
 	
+	/*
+	 * This is for testing purposes, wont automatically all the pieces to the player.
+	 */
+	public Player(int playerOrder) {
+		this.playerOrder = playerOrder;
+	}
+	
 	public abstract boolean lossCondition();
 	
 	public void addPiece(Piece piece) {

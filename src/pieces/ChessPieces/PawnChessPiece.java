@@ -45,10 +45,11 @@ public class PawnChessPiece extends ChessPiece{
 		Point rightDiagonal = new Point(currentPosition.x + board.getForwardDirection(player), currentPosition.y + 1);
 		Point leftDiagonal = new Point(currentPosition.x + board.getForwardDirection(player), currentPosition.y - 1);
 		
-		if(isInBounds(rightDiagonal, board) && !player.getPieces().contains(board.getPieceAt(rightDiagonal))) {
+		
+		if(isInBounds(rightDiagonal, board) && board.getPieceAt(rightDiagonal).isOpponentsPiece(player.getPlayerOrder()) ){
 			potentialMoves.add(rightDiagonal);
 		}
-		if(isInBounds(leftDiagonal, board) && !player.getPieces().contains(board.getPieceAt(leftDiagonal))) {
+		if(isInBounds(leftDiagonal, board) && board.getPieceAt(leftDiagonal).isOpponentsPiece(player.getPlayerOrder())) {
 			potentialMoves.add(leftDiagonal);
 		}
 		

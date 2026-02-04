@@ -64,4 +64,12 @@ public abstract class Piece {
 		return getPositionString(position);
 	}
 	
+	public int getOwner() {
+		return owner;
+	}
+	
+	public boolean isOpponentsPiece(int currentPlayerOrder) {
+		return(owner != -1 && owner != currentPlayerOrder);
+	}
+	
 }

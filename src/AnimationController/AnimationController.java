@@ -74,9 +74,9 @@ public abstract class AnimationController {
 	
 	public Point getInput(int numBox) {
 		if(numBox == 1) {
-			 return gameController.parsePoints(moveBox.getText());
+			 return parsePoints(moveBox.getText());
 		}else {
-			return gameController.parsePoints(pieceBox.getText());
+			return parsePoints(pieceBox.getText());
 		}
 	}
 
@@ -105,5 +105,13 @@ public abstract class AnimationController {
 	    return cell;
 	}
 
+	
+	public Point parsePoints(String stringPoint) {
+		String[] parts = stringPoint.split(",");
+		int x = Integer.parseInt(parts[0].trim());
+		int y = Integer.parseInt(parts[1].trim());
+		return new Point(x,y);
+	}
+	
 
 }

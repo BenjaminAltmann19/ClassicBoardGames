@@ -22,20 +22,14 @@ public class CheckersGameController extends GameController{
 	}
 
 	/*
-	 * This method is the main game loop
-	 * 
-	 * NOT IN USE
-	 */
-	public void gameLoop() {
-		while(!isGameWon()) {
-			//doOneTurn(playerOne);
-			//doOneTurn(playerTwo);
-		}
-	}
-
-	/*
 	 * Ask which piece to move
 	 * Ask where to move it
+	 * 
+	 * TO DO: 
+	 * 	check if game is over
+	 * 	display winner
+	 * 	add error messages for invalid moves
+	 * 
 	 */
 	public void doOneTurn() {
 		Player player = getPlayerForTurn();
