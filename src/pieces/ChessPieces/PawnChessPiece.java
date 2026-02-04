@@ -10,8 +10,8 @@ public class PawnChessPiece extends ChessPiece{
 
 	boolean isFirstMove;
 
-	public PawnChessPiece(Point startingPosition) {
-		super(startingPosition);
+	public PawnChessPiece(Point startingPosition, int owner) {
+		super(startingPosition, owner);
 		identifier = 1;
 		isFirstMove = true;
 	}

@@ -38,11 +38,11 @@ public class ChessPlayer extends Player {
 	private void initializePawns(Board board){
 		if(playerOrder == 0) {
 			for(int i = 0; i < Board.BOARD_SIZE; i++) {
-				pieces.add(new PawnChessPiece(new Point(1,i)));
+				pieces.add(new PawnChessPiece(new Point(1,i), playerOrder));
 			}
 		}else{
 			for(int i = 0; i < Board.BOARD_SIZE; i++) {
-				pieces.add(new PawnChessPiece(new Point(board.BOARD_SIZE - 2,i)));
+				pieces.add(new PawnChessPiece(new Point(board.BOARD_SIZE - 2,i), playerOrder));
 			}
 		}
 	}
@@ -53,11 +53,11 @@ public class ChessPlayer extends Player {
 	 */
 	private void initializeKnights(Board board) {
 		if(playerOrder == 0) {
-			pieces.add(new KnightChessPiece(new Point(0,1)));
-			pieces.add(new KnightChessPiece(new Point(0, board.BOARD_SIZE - 2)));
+			pieces.add(new KnightChessPiece(new Point(0,1), playerOrder));
+			pieces.add(new KnightChessPiece(new Point(0, board.BOARD_SIZE - 2), playerOrder));
 		}else {
-			pieces.add(new KnightChessPiece(new Point(board.BOARD_SIZE - 1, 1)));
-			pieces.add(new KnightChessPiece(new Point(board.BOARD_SIZE - 1, board.BOARD_SIZE - 2)));
+			pieces.add(new KnightChessPiece(new Point(board.BOARD_SIZE - 1, 1), playerOrder));
+			pieces.add(new KnightChessPiece(new Point(board.BOARD_SIZE - 1, board.BOARD_SIZE - 2), playerOrder));
 		}
 	}
 	

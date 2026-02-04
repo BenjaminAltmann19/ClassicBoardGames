@@ -13,9 +13,13 @@ public abstract class Piece {
 	//What type of piece this is (Knight, Pawn, Regular checker, promoted Checker...)
 	protected int identifier;
 	
+	//which player owns this piece.
+	protected int owner;
 	
-	public Piece(Point startPosition) {
+	
+	public Piece(Point startPosition, int owner) {
 		position = startPosition;
+		this.owner = owner;
 	}
 	
 	/*

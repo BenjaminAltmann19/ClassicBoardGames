@@ -8,7 +8,7 @@ import Player.Player;
 public class EmptyPiece extends Piece{
 
 	public EmptyPiece(Point startPosition) {
-		super(startPosition);
+		super(startPosition, -1);
 		identifier = 0;
 	}
 	

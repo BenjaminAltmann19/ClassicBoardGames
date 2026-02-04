@@ -9,8 +9,8 @@ import Player.Player;
 public class KnightChessPiece extends ChessPiece {
 
 	
-	public KnightChessPiece(Point startingPoint){
-		super(startingPoint);
+	public KnightChessPiece(Point startingPoint, int owner){
+		super(startingPoint, owner);
 		identifier = 2;
 	}
 	

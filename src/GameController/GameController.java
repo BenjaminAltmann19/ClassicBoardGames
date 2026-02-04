@@ -99,7 +99,7 @@ public abstract class GameController {
 	 * This method is adding the piece to the players "hand" and placing it on the board
 	 */
 	protected void createPiece(Player player, int row, int column) {
-		CheckersPiece piece = new CheckersPiece(new Point(row,column));
+		CheckersPiece piece = new CheckersPiece(new Point(row,column), player.getPlayerOrder());
 		player.addPiece(piece);
 		board.getBoard()[row][column] = piece;
 	}

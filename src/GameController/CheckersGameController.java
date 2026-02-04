@@ -145,7 +145,7 @@ public class CheckersGameController extends GameController{
 		Player player = getPlayerForTurn();
 		Point location = piece.getPosition();
 		if(player.getPieces().contains(piece)) {
-			PromotedCheckersPiece promoted = new PromotedCheckersPiece(location);
+			PromotedCheckersPiece promoted = new PromotedCheckersPiece(location, player.getPlayerOrder());
 			player.addPiece(promoted);
 			player.removePiece(piece);
 			board.setLocation(location, promoted);
