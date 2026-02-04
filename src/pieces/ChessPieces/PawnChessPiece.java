@@ -26,8 +26,8 @@ public class PawnChessPiece extends ChessPiece{
 	 */
 	public HashSet<Point> findPotentialMoves(Board board, Player player, Point currentPosition){
 		HashSet<Point> potentialMoves = new HashSet<Point>();
-		Point oneForward = new Point(currentPosition.x + board.getForwardDirection(player), currentPosition.y);
-		Point twoForward = new Point(currentPosition.x + (board.getForwardDirection(player) * 2), currentPosition.y);
+		Point oneForward = new Point(currentPosition.x + getForwardDirection(), currentPosition.y);
+		Point twoForward = new Point(currentPosition.x + getForwardDirection() * 2, currentPosition.y);
 		if(isInBounds(oneForward, board) && board.getPieceAt(oneForward).getIdentifier() == 0) {
 			potentialMoves.add(oneForward);
 			if(isFirstMove && isInBounds(twoForward, board) && (board.getPieceAt(twoForward).getIdentifier() == 0)) {
@@ -62,4 +62,11 @@ public class PawnChessPiece extends ChessPiece{
 		isFirstMove = false;
 	}
 	
+	private int getForwardDirection() {
+		if(owner == 1) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
 }

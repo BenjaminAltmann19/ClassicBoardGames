@@ -62,6 +62,7 @@ public abstract class Board {
 		}
 	}
 	
+	
 	/*
 	 * This method lets each player see the board from "their" side.
 	 * 

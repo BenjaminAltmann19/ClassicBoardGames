@@ -72,4 +72,5 @@ public abstract class Piece {
 		return(owner != -1 && owner != currentPlayerOrder);
 	}
 	
+	
 }
