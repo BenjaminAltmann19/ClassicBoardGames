@@ -15,6 +15,14 @@ public abstract class Player {
 	
 	public Player(int playerOrder, Board board) {
 		this.playerOrder = playerOrder;
+		initializePieces(board);
+	}
+	
+	/*
+	 * This is for testing purposes, wont automatically all the pieces to the player.
+	 */
+	public Player(int playerOrder) {
+		this.playerOrder = playerOrder;
 	}
 	
 	public abstract boolean lossCondition();
@@ -36,6 +44,8 @@ public abstract class Player {
 			pieces.remove(piece);
 		}
 	}
+	
+	protected abstract void initializePieces(Board board);
 	
 	
 	

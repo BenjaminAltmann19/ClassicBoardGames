@@ -6,14 +6,10 @@ import AnimationController.CheckersAnimationController;
 import Boards.CheckersBoard;
 import Player.CheckersPlayer;
 import Player.Player;
-import pieces.EmptyPiece;
 import pieces.Piece;
 import pieces.CheckersPieces.PromotedCheckersPiece;
 
 public class CheckersGameController extends GameController{
-
-	public static final int NUM_STARTING_ROWS = 3;
-
 
 
 	public CheckersGameController() {
@@ -21,54 +17,19 @@ public class CheckersGameController extends GameController{
 		board = new CheckersBoard();
 		playerOne = new CheckersPlayer(PLAYER_ONE, board);
 		playerTwo = new CheckersPlayer(PLAYER_TWO, board);
-		initialize();
+		updateBoard();
 		animationController = new CheckersAnimationController(board, this);
-	}
-
-
-
-	/*
-	 * set everything to be ready to start
-	 */
-	protected void initialize() {
-		super.initialize();
-		initializePlayer(playerOne);
-		initializePlayer(playerTwo);
-	}
-
-	/*
-	 * This method adds pieces to the board depending on which player they are.
-	 */
-	protected void initializePlayer(Player player, int startingRow, int startingColumn) {
-		for(int i = startingRow; i < startingRow + NUM_STARTING_ROWS; i++) {
-			for(int j = startingColumn; j < board.BOARD_SIZE; j++) {
-				if(j % 2 == 0) {
-					if(i % 2 == 0) {
-						createPiece(player, i, j);
-					}
-				}else {
-					if(i % 2 == 1) {
-						createPiece(player, i, j);
-					}
-				}
-			}
-		}
-	}
-	/*
-	 * This method is the main game loop
-	 * 
-	 * NOT IN USE
-	 */
-	public void gameLoop() {
-		while(!isGameWon()) {
-			//doOneTurn(playerOne);
-			//doOneTurn(playerTwo);
-		}
 	}
 
 	/*
 	 * Ask which piece to move
 	 * Ask where to move it
+	 * 
+	 * TO DO: 
+	 * 	check if game is over
+	 * 	display winner
+	 * 	add error messages for invalid moves
+	 * 
 	 */
 	public void doOneTurn() {
 		Player player = getPlayerForTurn();
@@ -87,6 +48,7 @@ public class CheckersGameController extends GameController{
 				changePlayerTurn();
 			}
 		}
+		updateBoard();
 	}
 
 
@@ -109,7 +71,6 @@ public class CheckersGameController extends GameController{
 			Point midPoint = findMidPoint(piece.getPosition(), nextLocation);
 			Piece captured = board.getPieceAt(midPoint);
 
-			board.setLocation(midPoint, new EmptyPiece(midPoint));
 			getOpponent(player).removePiece(captured);
 		}
 		super.movePiece(piece, nextLocation, player);

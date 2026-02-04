@@ -26,8 +26,8 @@ public class PawnChessPiece extends ChessPiece{
 	 */
 	public HashSet<Point> findPotentialMoves(Board board, Player player, Point currentPosition){
 		HashSet<Point> potentialMoves = new HashSet<Point>();
-		Point oneForward = new Point(currentPosition.x + board.getForwardDirection(player), currentPosition.y);
-		Point twoForward = new Point(currentPosition.x + (board.getForwardDirection(player) * 2), currentPosition.y);
+		Point oneForward = new Point(currentPosition.x + getForwardDirection(), currentPosition.y);
+		Point twoForward = new Point(currentPosition.x + getForwardDirection() * 2, currentPosition.y);
 		if(isInBounds(oneForward, board) && board.getPieceAt(oneForward).getIdentifier() == 0) {
 			potentialMoves.add(oneForward);
 			if(isFirstMove && isInBounds(twoForward, board) && (board.getPieceAt(twoForward).getIdentifier() == 0)) {
@@ -45,10 +45,11 @@ public class PawnChessPiece extends ChessPiece{
 		Point rightDiagonal = new Point(currentPosition.x + board.getForwardDirection(player), currentPosition.y + 1);
 		Point leftDiagonal = new Point(currentPosition.x + board.getForwardDirection(player), currentPosition.y - 1);
 		
-		if(isInBounds(rightDiagonal, board) && !player.getPieces().contains(board.getPieceAt(rightDiagonal))) {
+		
+		if(isInBounds(rightDiagonal, board) && board.getPieceAt(rightDiagonal).isOpponentsPiece(player.getPlayerOrder()) ){
 			potentialMoves.add(rightDiagonal);
 		}
-		if(isInBounds(leftDiagonal, board) && !player.getPieces().contains(board.getPieceAt(leftDiagonal))) {
+		if(isInBounds(leftDiagonal, board) && board.getPieceAt(leftDiagonal).isOpponentsPiece(player.getPlayerOrder())) {
 			potentialMoves.add(leftDiagonal);
 		}
 		
@@ -61,4 +62,11 @@ public class PawnChessPiece extends ChessPiece{
 		isFirstMove = false;
 	}
 	
+	private int getForwardDirection() {
+		if(owner == 1) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
 }

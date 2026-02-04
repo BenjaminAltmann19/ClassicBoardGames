@@ -1,4 +1,4 @@
-package pieces;
+package pieces.CheckersPieces;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import Boards.CheckersBoard;
 import Player.CheckersPlayer;
-import pieces.CheckersPieces.CheckersPiece;
 
 class TestPieces {
 
